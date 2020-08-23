@@ -1,0 +1,8 @@
+#!/bin/bash
+
+while read -r link
+do
+  title=$(curl "$link" -so - | grep -iPo '(?<=<title>)(.*)(?=</title>)' | sed -e 's/[[:space:]]*$//g' -e 's/^[[:space:]]*//g' | tr -d "[]\n" | sed -e 's/[[:space:]]+/[[:space:]]/g')
+  echo "[[$link][$title]]"
+done < "${1:-/dev/stdin}"
+
