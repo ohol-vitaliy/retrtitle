@@ -2,7 +2,8 @@ destination="$HOME/.local/bin"
 
 if ! [ -d "$destination" ]; then
     mkdir -p "$destination"
-    export PATH="$destination/:$PATH"
+    echo 'export PATH="'"$destination"':$PATH"' >> $HOME/.bashrc
+    source "$HOME/.bashrc"
 fi
 
 wget -P "$destination/" "https://raw.githubusercontent.com/ohol-vitaliy/retrtitle/master/retrtitle"
