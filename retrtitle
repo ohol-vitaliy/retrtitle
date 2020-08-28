@@ -1,8 +1,13 @@
 #!/bin/bash
-
-while read -r link
-do
-  title=$(curl "$link" -so - | grep -iPo '(?<=<title>)(.*)(?=</title>)' | sed -e 's/[[:space:]]*$//g' -e 's/^[[:space:]]*//g' | tr -d "[]\n" | sed -e 's/[[:space:]]+/[[:space:]]/g')
-  echo "[[$link][$title]]"
-done < "${1:-/dev/stdin}"
-
+if [ $# -eq 0 ]; then
+  read link
+else
+  link="$1"
+fi
+if [ -z "$link" ]; then
+  echo "No arguments given"
+  exit 22  # Invalid argument exit code
+fi
+title=$(curl "$link" -so - | grep -iPo '(?<=<title>)(.*)(?=</title>)' | sed -e 's/[[:space:]]*$//g' -e 's/^[[:space:]]*//g' | tr -d "[]\n" | sed -e 's/[[:space:]]+/[[:space:]]/g')
+echo "[[$link][$title]]"
+exit 0  # Success exit code

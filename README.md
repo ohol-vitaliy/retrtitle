@@ -18,14 +18,14 @@ curl https://raw.githubusercontent.com/ohol-vitaliy/retrtitle/master/setup.sh | 
 
 ## Usage
 
-Just pass list of urls or file with urls into script  
+Just pass url as argument or do it via pipeline
 
 ``` bash
-retrtitle "file_with_urls.txt"
+retrtitle "https://your_url.com"
 ```
 
 or
 
 ``` bash
-cat file_with_urls.txt | retrtitle > out.txt
+echo "https://your_url.com" | retrtitle
 ```
